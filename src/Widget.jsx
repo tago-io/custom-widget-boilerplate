@@ -1,10 +1,15 @@
 import { h, render } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import "@tago/custom-widget";
 import "@tago/custom-widget/dist/custom-widget.css"
 
 function Widget() {
   const [count, setCount] = useState(0);
+  useEffect(() => {
+    window.TagoIO.onStart(null, (widget) => {
+      console.log(widget)
+    });
+  }, []);
 
   return (
     <div>
