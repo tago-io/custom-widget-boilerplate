@@ -13,13 +13,18 @@ function Widget() {
   useEffect(() => {
     window.TagoIO.onStart(null, (widget) => {
       setWidgetTitle(widget.label);
+      // get the name of the first variable
+      setVariable({ variable: widget.display.variables[0].variable });
     });
 
     window.TagoIO.onRealtime((data) => {
-      setVariable({
-        variable: data.result[0].variable,
-        value: data.result[0].value,
-      })
+      // get the last variable from realtime
+      if (data && data.result.length) {
+        setVariable({
+          variable: data.result[0].variable,
+          value: data.result[0].value,
+        })
+      }
     })
   }, []);
 
