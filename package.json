@@ -18,7 +18,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "@tago/custom-widget": "^1.0.2",
+    "@tago/custom-widget": "^1.0.3",
     "preact": "^10.4.0"
   }
 }
