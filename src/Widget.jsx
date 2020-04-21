@@ -7,6 +7,7 @@ import "./Widget.css";
 function Widget() {
   const [widgetTitle, setWidgetTitle] = useState("");
   const [variable, setVariable] = useState({});
+  // input text
   const [text, setText] = useState("");
   const [response, setResponse] = useState("");
 
@@ -28,21 +29,32 @@ function Widget() {
     })
   }, []);
 
+  // clears the return message when sending data
+  const clearResponse = () => {
+    setTimeout(() => {
+      setResponse("");
+    }, 3000);
+  }
+
   const sendData = () => {
-    window.TagoIO.sendData(
-      [{ 
-        ...variable,
-        value: text 
-      }], { autoFill: true }, 
+    const payload = [{ 
+      ...variable,
+      value: text 
+    }];
+    const options = {
+      // complete the variables with the bucket and origin ids (if this option is false, this information needs to be passed)
+      // autoFill can be a problem if you have two variables with the same name in different buckets
+      autoFill: true,
+    }
+    window.TagoIO.sendData(payload, options, 
+      // callback that runs when sendData returns
       (response) => {
         if (response.status) {
-          setResponse("data sent successfully");
+          setResponse("Data sent successfully");
         } else {
           setResponse(response.message);
         }
-        setTimeout(() => {
-          setResponse("");
-        }, 3000);
+        clearResponse();
     })
   }
 
