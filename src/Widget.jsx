@@ -12,7 +12,10 @@ function Widget() {
   const [response, setResponse] = useState("");
 
   useEffect(() => {
-    window.TagoIO.onStart(null, (widget) => {
+    // start comunication with TagoIO
+    window.TagoIO.ready();
+    // receives the widget data when it starts
+    window.TagoIO.onStart((widget) => {
       setWidgetTitle(widget.label);
       // get the name of the first variable
       setVariable({ variable: widget.display.variables[0].variable });
@@ -26,7 +29,7 @@ function Widget() {
           value: data.result[0].value,
         })
       }
-    })
+    });
   }, []);
 
   // clears the return message when sending data
