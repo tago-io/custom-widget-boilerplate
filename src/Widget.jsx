@@ -23,10 +23,10 @@ function Widget() {
 
     window.TagoIO.onRealtime((data) => {
       // get the last variable from realtime
-      if (data && data.result.length) {
+      if (data && data.length) {
         setVariable({
-          variable: data.result[0].variable,
-          value: data.result[0].value,
+          variable: data[0].result[0].variable,
+          value: data[0].result[0].value,
         })
       }
     });
